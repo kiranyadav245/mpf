@@ -10,14 +10,14 @@ import com.murari.vo.Stone;
 
 @Controller
 public class StoneController {
-	@GetMapping("/isd")
+	@GetMapping("/stonein")
 	public String isdForm(Model model){
 		model.addAttribute("stone", new Stone());
 		return "sd/stoneIn";
 	}
 	
-	@PostMapping("/isd")
+	@PostMapping("/submitStone")
 	public String isdSubmit(@ModelAttribute Stone stone){
-		return "sd/sdlist";
+		return "sd/smsStoneIn";
 	}
 }
