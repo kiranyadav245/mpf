@@ -13,7 +13,7 @@ public class StoneController {
 	@GetMapping("/isd")
 	public String isdForm(Model model){
 		model.addAttribute("stone", new Stone());
-		return "sd/isd";
+		return "sd/stoneIn";
 	}
 	
 	@PostMapping("/isd")
