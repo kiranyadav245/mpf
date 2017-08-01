@@ -13,16 +13,16 @@ public class StoneController {
 	@GetMapping("/stonein")
 	public String stoneInForm(Model model){
 		model.addAttribute("stone", new Stone());
-		return "sd/stoneIn";
+		return "stone/stoneIn";
 	}
 	
 	@PostMapping("/submitStone")
 	public String submitStoneIn(@ModelAttribute Stone stone){
-		return "sd/smsStoneIn";
+		return "stone/smsStoneIn";
 	}
 	
 	@PostMapping("/smsStoneIn")
 	public String smsStoneIn(@ModelAttribute Stone stone){
-		return "sd/smsStoneIn";
+		return "stone/smsStoneIn";
 	}
 }

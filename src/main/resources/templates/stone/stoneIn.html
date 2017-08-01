@@ -10,7 +10,7 @@
 
 <div class="container">
 	
-    <form action="#" th:action="@{/isd}" th:object="${stone}" method="post">
+    <form action="#" th:action="@{/submitStone}" th:object="${stone}" method="post">
     	<p>Id: <input type="text" th:field="*{id}" /></p>
         <p>Message: <input type="text" th:field="*{content}" /></p>
         <p><input type="submit" value="Submit" /> </p>
