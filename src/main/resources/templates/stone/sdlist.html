@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>MPF - ISD Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+	
+    <p th:text="'id: ' + ${stone.id}" />
+    <p th:text="'content: ' + ${stone.content}" />
+    <a href="/isd">Submit another message</a>
+   </div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
