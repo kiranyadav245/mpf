@@ -34,6 +34,10 @@ public class StoneController {
 	
 	@PostMapping("/submitStone")
 	public String submitStoneIn(@ModelAttribute Stone stone){
+		for(StoneIn s : stone.getStoneIns()){
+			s.setOpeningStock(s.getStock());
+			s.setStock(s.getStock()*100);
+		}
 		return "stone/smsStoneIn";
 	}
 	
