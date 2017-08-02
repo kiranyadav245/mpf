@@ -1,37 +1,44 @@
 package com.murari.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Stone {
     private long id;
-    private String content;
-    private String qualityRange;
-    private long stock; //closing quantity
-    private int unit;   //ton
-    private Date inDate;
-    private String openingQuantity;
-    private String comments; //get by who and which vehicle
-    private long inStone; // capture stone in at the date
+    private long openingQuantity;
+    private long stock;
+    private List<StoneIn> stoneIns;
+    private List<ConsumedStone> consumedStones;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getOpeningQuantity() {
+		return openingQuantity;
+	}
+	public void setOpeningQuantity(long openingQuantity) {
+		this.openingQuantity = openingQuantity;
+	}
+	public long getStock() {
+		return stock;
+	}
+	public void setStock(long stock) {
+		this.stock = stock;
+	}
+	public List<StoneIn> getStoneIns() {
+		return stoneIns;
+	}
+	public void setStoneIns(List<StoneIn> stoneIns) {
+		this.stoneIns = stoneIns;
+	}
+	public List<ConsumedStone> getConsumedStones() {
+		return consumedStones;
+	}
+	public void setConsumedStones(List<ConsumedStone> consumedStones) {
+		this.consumedStones = consumedStones;
+	}
     
-    //stone consume properties
-    private Date consumeDate;
-    private long consumedDate; //how much stone consumed
-    private String operator;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
     
 }
