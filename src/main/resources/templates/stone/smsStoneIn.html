@@ -11,8 +11,26 @@
 <div class="container">
 	
     <p th:text="'id: ' + ${stone.id}" />
-    <p th:text="'content: ' + ${stone.content}" />
-    <a href="/isd">Submit another message</a>
+    
+    <table border="1" align="center">
+  <tr>
+    <th></th>
+    <th>Range</th>
+    <th>IN STOCK</th>
+    <th>Stock In</th>
+  </tr>
+  <tr th:each="stoneIn, iter : ${stone.stoneIns}" >
+    <td th:text="${stoneIn.qualityRange.rangeId}" ></td>
+    <td th:text="${stoneIn.qualityRange.range}" ></td>
+    <td th:text="${stoneIn.inStone}" ></td>
+    <td th:text="${stoneIn.stock}" ></td>
+    
+  </tr>
+  <tr>
+  	<td colspan="4"><input type="submit" value="send SMS" /></td>
+  </tr>
+</table>
+    
    </div>
 
 <div th:replace="fragments/footer :: footer"/>
