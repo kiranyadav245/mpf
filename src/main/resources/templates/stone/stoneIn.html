@@ -1,22 +1,72 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>MPF - ISD Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <div th:replace="fragments/header :: header-css"/>
+<title>MPF - ISD Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:replace="fragments/header :: header-css" />
+
+
+<script type="text/javascript">
+	function updateSum(index) {
+		var x = index.id;
+		var y = "stock-" + x;
+		try {
+			document.getElementById(y).value = parseInt(index.value)
+					+ parseInt(document.getElementById(y).value);
+		} catch (e) {
+			index.value = 0;
+			document.getElementById(y).value = "0";
+			alert("enter valide value");
+		}
+		if (document.getElementById(y).value == "NaN") {
+			index.value = 0;
+			document.getElementById(y).value = "0";
+			alert("enter valide value");
+		}
+	}
+</script>
 </head>
 <body>
-<div th:replace="fragments/header :: header"/>
+	<div th:replace="fragments/header :: header" />
 
-<div class="container">
-	
-    <form action="#" th:action="@{/submitStone}" th:object="${stone}" method="post">
-    	<p>Id: <input type="text" th:field="*{id}" /></p>
-        <p>Message: <input type="text" th:field="*{content}" /></p>
-        <p><input type="submit" value="Submit" /> </p>
-    </form>
-   </div>
+	<div class="container">
 
-<div th:replace="fragments/footer :: footer"/>
+		<form action="#" th:action="@{/submitStone}" th:object="${stone}"
+			method="post">
+			<table class="responstable">
+				<tr>
+					
+					<th>Range</th>
+					<th>Opening Stock</th>
+					<th>Stock In</th>
+					<th>Stock</th>
+					<th>Comments</th>
+					
+				</tr>
+				
+				<tr th:each="stoneIn, iter : ${stone.stoneIns}">
+					<input type="hidden"
+						th:field="*{stoneIns[__${iter.index}__].qualityRange.rangeId}" />
+					<td><input class="noborder" type="text"
+						th:field="*{stoneIns[__${iter.index}__].qualityRange.range}" /></td>
+					<td><p th:text="${stoneIn.stock}" /></td>
+					<td><input type="text" th:id="${iter.index}"
+						th:field="*{stoneIns[__${iter.index}__].inStone}"
+						onchange="updateSum(this)" /></td>
+					<td><input type="text" class="noborder"
+						th:id="'stock-' +${iter.index}"
+						th:field="*{stoneIns[__${iter.index}__].stock}" /></td>
+					<td><textarea rows="1" cols="25"
+							th:field="*{stoneIns[__${iter.index}__].Comments}"></textarea></td>
+				</tr>
+			</table>
+
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
+		</form>
+	</div>
+
+	<div th:replace="fragments/footer :: footer" />
 </body>
 </html>
