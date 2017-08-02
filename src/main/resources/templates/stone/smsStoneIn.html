@@ -9,28 +9,35 @@
 <div th:replace="fragments/header :: header"/>
 
 <div class="container">
-	
+	<form action="#" th:action="@{/smsStoneIn}" th:object="${stone}"
+			method="post">
     <p th:text="'id: ' + ${stone.id}" />
+    <input type="text"
+						th:field="${stone.id}" />
     
-    <table border="1" align="center">
+    <table class="responstable">
   <tr>
     <th></th>
     <th>Range</th>
-    <th>IN STOCK</th>
+    <th>Opening Stock</th>
     <th>Stock In</th>
+    <th>Stock in Store</th>
+    <th>Comments</th>
   </tr>
   <tr th:each="stoneIn, iter : ${stone.stoneIns}" >
     <td th:text="${stoneIn.qualityRange.rangeId}" ></td>
     <td th:text="${stoneIn.qualityRange.range}" ></td>
+    <td th:text="${stoneIn.openingStock}" ></td>
     <td th:text="${stoneIn.inStone}" ></td>
     <td th:text="${stoneIn.stock}" ></td>
+    <td th:text="${stoneIn.comments}" ></td>
     
   </tr>
   <tr>
-  	<td colspan="4"><input type="submit" value="send SMS" /></td>
+  	<th colspan="6"><input class="submitButton" type="submit" value="send SMS" /></th>
   </tr>
 </table>
-    
+    </form>
    </div>
 
 <div th:replace="fragments/footer :: footer"/>
