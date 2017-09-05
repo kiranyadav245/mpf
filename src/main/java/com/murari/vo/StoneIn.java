@@ -10,6 +10,8 @@ public class StoneIn {
 	private Date inDate;
 	private String comments; //get by who and which vehicle
 	private QualityRange qualityRange;
+	private long openingStock;
+	
 	public long getId() {
 		return id;
 	}
@@ -51,5 +53,11 @@ public class StoneIn {
 	}
 	public void setQualityRange(QualityRange qualityRange) {
 		this.qualityRange = qualityRange;
+	}
+	public long getOpeningStock() {
+		return openingStock;
+	}
+	public void setOpeningStock(long openingStock) {
+		this.openingStock = openingStock;
 	}
 }
