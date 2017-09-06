@@ -12,6 +12,8 @@ public class StoneIn {
 	private QualityRange qualityRange;
 	private long openingStock;
 	
+	//Kiran
+	
 	public long getId() {
 		return id;
 	}
