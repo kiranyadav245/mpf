@@ -17,7 +17,7 @@
     
     <table class="responstable">
   <tr>
-    <th></th>
+    
     <th>Range</th>
     <th>Opening Stock</th>
     <th>Stock In</th>
@@ -25,7 +25,7 @@
     <th>Comments</th>
   </tr>
   <tr th:each="stoneIn, iter : ${stone.stoneIns}" >
-    <td th:text="${stoneIn.qualityRange.rangeId}" ></td>
+    <p th:hidden="${stoneIn.qualityRange.rangeId}" /> 
     <td th:text="${stoneIn.qualityRange.range}" ></td>
     <td th:text="${stoneIn.openingStock}" ></td>
     <td th:text="${stoneIn.inStone}" ></td>

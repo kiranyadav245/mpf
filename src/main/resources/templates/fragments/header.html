@@ -3,7 +3,7 @@
     <div th:fragment="header-css">
      <meta charset="utf-8" />
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>User preferences in Nav Bar - Bootsnipp.com</title>
+    <title>MPF</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" th:href="@{/css/bootstaplocal.css}"
               href="../../css/bootstaplocal.css" />
@@ -59,7 +59,7 @@
               <div class="pull-right">
                 <ul class="nav pull-right">
                 	<li class="divider-vertical"></li>
-                    <li><a class="navbar-brand" href="#" >Welcome, User</a></li>
+                    <li><a class="navbar-brand" href="#" >Welcome, <span sec:authentication="name" /></a></li>
                     <li class="divider-vertical"></li>
                     <li><a class="navbar-brand" th:href="@{/logout}">Sign Out</a></li>
                         
