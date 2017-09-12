@@ -1,28 +1,71 @@
-package com.murari.vo;
+package com.murari.entity;
 
-public class QualityRange {
-	public QualityRange(){
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="QUALITY_RANGE")
+public class QualityRange implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		
-	}
-	public QualityRange(String rangeId, String range) {
-		super();
-		this.rangeId = rangeId;
-		this.range = range;
-	}
-	
-	private String rangeId;
-	private String range;
-	public String getRangeId() {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="RANGE_ID")
+	private int rangeId;
+	@Column(name="RANGE_NM")
+	private String rangeName;
+	@Column(name="RANGE_SHORT_NM")
+	private String rangeShortName;
+	@Column(name="RANGE_FROM")
+	private int rangeFrom;
+	@Column(name="RANGE_TO")
+	private int rangeTo;
+	@Column(name="VALID_IND")
+	private String validIndicator;
+	public int getRangeId() {
 		return rangeId;
 	}
-	public void setRangeId(String rangeId) {
+	public void setRangeId(int rangeId) {
 		this.rangeId = rangeId;
 	}
-	public String getRange() {
-		return range;
+	public String getRangeName() {
+		return rangeName;
 	}
-	public void setRange(String range) {
-		this.range = range;
+	public void setRangeName(String rangeName) {
+		this.rangeName = rangeName;
+	}
+	public String getRangeShortName() {
+		return rangeShortName;
+	}
+	public void setRangeShortName(String rangeShortName) {
+		this.rangeShortName = rangeShortName;
+	}
+	public int getRangeFrom() {
+		return rangeFrom;
+	}
+	public void setRangeFrom(int rangeFrom) {
+		this.rangeFrom = rangeFrom;
+	}
+	public int getRangeTo() {
+		return rangeTo;
+	}
+	public void setRangeTo(int rangeTo) {
+		this.rangeTo = rangeTo;
+	}
+	public String getValidIndicator() {
+		return validIndicator;
+	}
+	public void setValidIndicator(String validIndicator) {
+		this.validIndicator = validIndicator;
 	}
 	
 }

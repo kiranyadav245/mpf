@@ -1,59 +1,78 @@
 package com.murari.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.murari.vo.QualityRange;
+import com.murari.entity.QualityRange;
+import com.murari.service.master.QualityRangeService;
+import com.murari.vo.QualityRangeVo;
 import com.murari.vo.Stone;
 import com.murari.vo.StoneIn;
 
 @Controller
 public class StoneController {
+	@Autowired
+	QualityRangeService qualityRangeService;
+
+	public static List<QualityRangeVo> qualityRangeVos;
+	public static Map<Integer, QualityRangeVo> qualityRangeVoMap = new HashMap<>();
+
 	@GetMapping("/stonein")
-	public String stoneInForm(Model model){
+	public String stoneInForm(Model model) {
 		Stone stone = new Stone();
 		List<StoneIn> stoneIns = new ArrayList<>();
-		List<QualityRange> qualityRanges = qualityRanges();
-		int i=1;
-		for(QualityRange range : qualityRanges){
+		List<QualityRangeVo> qualityRanges = qualityRanges();
+		int i = 1;
+		for (QualityRangeVo range : qualityRanges) {
 			StoneIn sIn = new StoneIn();
 			sIn.setQualityRange(range);
-			sIn.setStock(25*i++);
+			sIn.setStock(25 * i++);
 			stoneIns.add(sIn);
 		}
 		stone.setStoneIns(stoneIns);
 		model.addAttribute("stone", stone);
 		return "stone/stoneIn";
 	}
-	
+
 	@PostMapping("/submitStone")
-	public String submitStoneIn(@ModelAttribute Stone stone){
-		for(StoneIn s : stone.getStoneIns()){
+	public String submitStoneIn(@ModelAttribute Stone stone) {
+		for (StoneIn s : stone.getStoneIns()) {
 			s.setOpeningStock(s.getStock());
-			s.setStock(s.getStock()*100);
+			s.setStock(s.getStock() * 100);
+			s.setQualityRange(qualityRangeVoMap.get(s.getQualityRange().getRangeId()));
 		}
 		return "stone/smsStoneIn";
 	}
-	
+
 	@PostMapping("/smsStoneIn")
-	public String smsStoneIn(@ModelAttribute Stone stone){
+	public String smsStoneIn(@ModelAttribute Stone stone) {
 		return "stone/smsStoneIn";
 	}
-	
-	
-	public List<QualityRange> qualityRanges(){
-		List<QualityRange> range = new ArrayList<>();
-		range.add(new QualityRange("1","90-100"));
-		range.add(new QualityRange("2","80-90"));
-		range.add(new QualityRange("3","70-80"));
-		range.add(new QualityRange("4","60-70"));
-		range.add(new QualityRange("5","low"));
-		return range;
+
+	public List<QualityRangeVo> qualityRanges() {
+		if (qualityRangeVos == null) {
+			qualityRangeVos = new ArrayList<>();
+			List<QualityRange> qualityRages = qualityRangeService.getQualityRages();
+			for (QualityRange qualityRange : qualityRages) {
+				QualityRangeVo vo = new QualityRangeVo();
+				vo.setRangeId(qualityRange.getRangeId());
+				vo.setRangeName(qualityRange.getRangeName());
+				vo.setRangeShortName(qualityRange.getRangeShortName());
+				vo.setRangeFrom(qualityRange.getRangeFrom());
+				vo.setRangeTo(qualityRange.getRangeTo());
+				qualityRangeVos.add(vo);
+				qualityRangeVoMap.put(vo.getRangeId(), vo);
+			}
+		}
+		return qualityRangeVos;
 	}
 }

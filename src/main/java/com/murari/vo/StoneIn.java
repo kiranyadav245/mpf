@@ -9,7 +9,7 @@ public class StoneIn {
 	private int unit;   //ton
 	private Date inDate;
 	private String comments; //get by who and which vehicle
-	private QualityRange qualityRange;
+	private QualityRangeVo qualityRange;
 	private long openingStock;
 	
 	//Kiran
@@ -50,10 +50,10 @@ public class StoneIn {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public QualityRange getQualityRange() {
+	public QualityRangeVo getQualityRange() {
 		return qualityRange;
 	}
-	public void setQualityRange(QualityRange qualityRange) {
+	public void setQualityRange(QualityRangeVo qualityRange) {
 		this.qualityRange = qualityRange;
 	}
 	public long getOpeningStock() {

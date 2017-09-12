@@ -7,7 +7,7 @@ public class ConsumedStone {
 	private Date consumeDate;
     private long consumedStone; //how much stone consumed per day
     private String operator;	//machine operator
-    private QualityRange qualityRange; // stone quality
+    private QualityRangeVo qualityRange; // stone quality
 	private long stock; //closing quantity
 	private int unit; //unit of stone ton/etc
 	public long getId() {
@@ -46,10 +46,10 @@ public class ConsumedStone {
 	public void setUnit(int unit) {
 		this.unit = unit;
 	}
-	public QualityRange getQualityRange() {
+	public QualityRangeVo getQualityRange() {
 		return qualityRange;
 	}
-	public void setQualityRange(QualityRange qualityRange) {
+	public void setQualityRange(QualityRangeVo qualityRange) {
 		this.qualityRange = qualityRange;
 	}
 	
