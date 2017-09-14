@@ -1,19 +1,26 @@
 package com.murari.vo;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Stone {
-    private long id;
+    private long inStoneId;
+    private long consumedStoneId;
     private long openingQuantity;
     private long stock;
-    private List<StoneIn> stoneIns;
+    private List<StoneInVo> stoneIns;
     private List<ConsumedStone> consumedStones;
-	public long getId() {
-		return id;
+	
+	public long getInStoneId() {
+		return inStoneId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setInStoneId(long inStoneId) {
+		this.inStoneId = inStoneId;
+	}
+	public long getConsumedStoneId() {
+		return consumedStoneId;
+	}
+	public void setConsumedStoneId(long consumedStoneId) {
+		this.consumedStoneId = consumedStoneId;
 	}
 	public long getOpeningQuantity() {
 		return openingQuantity;
@@ -27,10 +34,10 @@ public class Stone {
 	public void setStock(long stock) {
 		this.stock = stock;
 	}
-	public List<StoneIn> getStoneIns() {
+	public List<StoneInVo> getStoneIns() {
 		return stoneIns;
 	}
-	public void setStoneIns(List<StoneIn> stoneIns) {
+	public void setStoneIns(List<StoneInVo> stoneIns) {
 		this.stoneIns = stoneIns;
 	}
 	public List<ConsumedStone> getConsumedStones() {

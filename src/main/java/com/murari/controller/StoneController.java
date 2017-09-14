@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.murari.entity.QualityRange;
+import com.murari.entity.StoneIn;
 import com.murari.service.master.QualityRangeService;
+import com.murari.service.transation.StoneService;
 import com.murari.vo.QualityRangeVo;
 import com.murari.vo.Stone;
-import com.murari.vo.StoneIn;
+import com.murari.vo.StoneInVo;
 
 @Controller
 public class StoneController {
 	@Autowired
 	QualityRangeService qualityRangeService;
+	
+	@Autowired
+	StoneService stoneService;
 
 	public static List<QualityRangeVo> qualityRangeVos;
 	public static Map<Integer, QualityRangeVo> qualityRangeVoMap = new HashMap<>();
@@ -29,11 +34,11 @@ public class StoneController {
 	@GetMapping("/stonein")
 	public String stoneInForm(Model model) {
 		Stone stone = new Stone();
-		List<StoneIn> stoneIns = new ArrayList<>();
+		List<StoneInVo> stoneIns = new ArrayList<>();
 		List<QualityRangeVo> qualityRanges = qualityRanges();
 		int i = 1;
 		for (QualityRangeVo range : qualityRanges) {
-			StoneIn sIn = new StoneIn();
+			StoneInVo sIn = new StoneInVo();
 			sIn.setQualityRange(range);
 			sIn.setStock(25 * i++);
 			stoneIns.add(sIn);
@@ -45,11 +50,13 @@ public class StoneController {
 
 	@PostMapping("/submitStone")
 	public String submitStoneIn(@ModelAttribute Stone stone) {
-		for (StoneIn s : stone.getStoneIns()) {
+		for (StoneInVo s : stone.getStoneIns()) {
 			s.setOpeningStock(s.getStock());
 			s.setStock(s.getStock() * 100);
 			s.setQualityRange(qualityRangeVoMap.get(s.getQualityRange().getRangeId()));
 		}
+		long inStoneId = stoneService.saveDailyStoneIn(stone);
+		stone.setInStoneId(inStoneId);
 		return "stone/smsStoneIn";
 	}
 
@@ -61,7 +68,7 @@ public class StoneController {
 	public List<QualityRangeVo> qualityRanges() {
 		if (qualityRangeVos == null) {
 			qualityRangeVos = new ArrayList<>();
-			List<QualityRange> qualityRages = qualityRangeService.getQualityRages();
+			List<QualityRange> qualityRages = qualityRangeService.getQualityRanges();
 			for (QualityRange qualityRange : qualityRages) {
 				QualityRangeVo vo = new QualityRangeVo();
 				vo.setRangeId(qualityRange.getRangeId());

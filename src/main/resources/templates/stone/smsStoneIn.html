@@ -11,9 +11,9 @@
 <div class="container">
 	<form action="#" th:action="@{/smsStoneIn}" th:object="${stone}"
 			method="post">
-    <p th:text="'id: ' + ${stone.id}" />
+    <p th:text="'id: ' + ${stone.inStoneId}" />
     <input type="text"
-						th:field="${stone.id}" />
+						th:field="${stone.inStoneId}" />
     
     <table class="responstable">
   <tr>
@@ -28,7 +28,7 @@
     <p th:hidden="${stoneIn.qualityRange.rangeId}" /> 
     <td th:text="${stoneIn.qualityRange.range}" ></td>
     <td th:text="${stoneIn.openingStock}" ></td>
-    <td th:text="${stoneIn.inStone}" ></td>
+    <td th:text="${stoneIn.inQuantity}" ></td>
     <td th:text="${stoneIn.stock}" ></td>
     <td th:text="${stoneIn.comments}" ></td>
     

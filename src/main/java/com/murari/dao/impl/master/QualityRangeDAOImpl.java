@@ -14,7 +14,7 @@ public class QualityRangeDAOImpl implements QualityRangeDAO {
 	private EntityManager entityManager;
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<QualityRange> getQualityRages() {
+	public List<QualityRange> getQualityRanges() {
 		String hql = "FROM QualityRange as qr ORDER BY qr.rangeId";
 		return (List<QualityRange>) entityManager.createQuery(hql).getResultList();
 	}
@@ -32,9 +32,9 @@ public class QualityRangeDAOImpl implements QualityRangeDAO {
 
 	@Override
 	public void updateQualityRange(QualityRange qualityRange) {
-		QualityRange artcl = getQualityRangeById(qualityRange.getRangeId());
-		artcl.setRangeName(qualityRange.getRangeName());
-		artcl.setRangeShortName(qualityRange.getRangeShortName());
+		QualityRange range = getQualityRangeById(qualityRange.getRangeId());
+		range.setRangeName(qualityRange.getRangeName());
+		range.setRangeShortName(qualityRange.getRangeShortName());
 		entityManager.flush();
 	}
 

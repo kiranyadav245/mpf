@@ -15,8 +15,8 @@ public class QualityRangeServiceImpl implements QualityRangeService {
 	@Autowired
 	private QualityRangeDAO qualityRangeDao;
 	@Override
-	public List<QualityRange> getQualityRages() {
-		return qualityRangeDao.getQualityRages();
+	public List<QualityRange> getQualityRanges() {
+		return qualityRangeDao.getQualityRanges();
 	}
 
 	@Override

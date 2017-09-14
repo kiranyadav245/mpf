@@ -18,7 +18,6 @@ public class QualityRange implements Serializable{
 	private static final long serialVersionUID = 1L;
 		
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="RANGE_ID")
 	private int rangeId;
 	@Column(name="RANGE_NM")

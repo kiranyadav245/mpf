@@ -3,7 +3,7 @@ package com.murari.dao.master;
 import java.util.List;
 import com.murari.entity.QualityRange;
 public interface QualityRangeDAO {
-	List<QualityRange> getQualityRages();
+	List<QualityRange> getQualityRanges();
 	QualityRange getQualityRangeById(int rangeId);
 	void addQualityRange(QualityRange qualityRange);
 	void updateQualityRange(QualityRange qualityRange);

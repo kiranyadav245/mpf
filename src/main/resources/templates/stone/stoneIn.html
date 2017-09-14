@@ -29,7 +29,7 @@
 						th:field="*{stoneIns[__${iter.index}__].qualityRange.range}" /></td>
 					<td><p th:text="${stoneIn.stock}" /></td>
 					<td><input type="number" min="0" th:id="${iter.index}"
-						th:field="*{stoneIns[__${iter.index}__].inStone}"
+						th:field="*{stoneIns[__${iter.index}__].inQuantity}"
 						onchange="updateSum(this)" /></td>
 					<input type="hidden" 
 						th:id="'stock-' +${iter.index}"
