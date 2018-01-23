@@ -46,6 +46,12 @@ public class Stone {
 	public void setConsumedStones(List<ConsumedStone> consumedStones) {
 		this.consumedStones = consumedStones;
 	}
+	@Override
+	public String toString() {
+		return "Stone [inStoneId=" + inStoneId + ", consumedStoneId=" + consumedStoneId + ", openingQuantity="
+				+ openingQuantity + ", stock=" + stock + ", stoneIns=" + stoneIns + ", consumedStones=" + consumedStones
+				+ "]";
+	}
     
     
 }

@@ -12,10 +12,11 @@ import com.murari.entity.QualityRange;
 public class QualityRangeDAOImpl implements QualityRangeDAO {
 	@PersistenceContext	
 	private EntityManager entityManager;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<QualityRange> getQualityRanges() {
-		String hql = "FROM QualityRange as qr ORDER BY qr.rangeId";
+		String hql = "FROM QualityRange as qr where qr.validIndicator='Y' ORDER BY qr.rangeId";
 		return (List<QualityRange>) entityManager.createQuery(hql).getResultList();
 	}
 

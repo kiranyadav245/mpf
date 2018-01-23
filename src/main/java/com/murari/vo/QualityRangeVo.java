@@ -53,5 +53,13 @@ public class QualityRangeVo {
 	public void setRange(String range) {
 		this.range = range;
 	}
+	@Override
+	public String toString() {
+		return "QualityRangeVo [rangeId=" + rangeId + ", rangeName=" + rangeName + ", rangeShortName=" + rangeShortName
+				+ ", rangeFrom=" + rangeFrom + ", rangeTo=" + rangeTo + ", range=" + range + ", validIndicator="
+				+ validIndicator + "]";
+	}
+	
+	
 	
 }

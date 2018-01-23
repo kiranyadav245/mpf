@@ -13,4 +13,5 @@ public interface StoneDAO {
 	void updateStoneStock(StoneStock stoneStock);
 	boolean stoneStockExists(int qualityRangeId);
 	public long getInStoneMaxId();
+	public List<StoneStock> getStockedStone();
 }

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.murari.entity.QualityRange;
-import com.murari.entity.StoneIn;
 import com.murari.service.master.QualityRangeService;
 import com.murari.service.transation.StoneService;
 import com.murari.vo.QualityRangeVo;
 import com.murari.vo.Stone;
 import com.murari.vo.StoneInVo;
+import com.murari.vo.StoneStockVo;
 
 @Controller
 public class StoneController {
@@ -36,11 +36,11 @@ public class StoneController {
 		Stone stone = new Stone();
 		List<StoneInVo> stoneIns = new ArrayList<>();
 		List<QualityRangeVo> qualityRanges = qualityRanges();
-		int i = 1;
-		for (QualityRangeVo range : qualityRanges) {
+		List<StoneStockVo> stockedStones = stoneService.getStockedStones();
+		for (StoneStockVo ssVo : stockedStones) {
 			StoneInVo sIn = new StoneInVo();
-			sIn.setQualityRange(range);
-			sIn.setStock(25 * i++);
+			sIn.setQualityRange(ssVo.getQualityRangeVo());
+			sIn.setStock(ssVo.getStoneStock());
 			stoneIns.add(sIn);
 		}
 		stone.setStoneIns(stoneIns);
@@ -50,10 +50,16 @@ public class StoneController {
 
 	@PostMapping("/submitStone")
 	public String submitStoneIn(@ModelAttribute Stone stone) {
+		List<StoneStockVo> stockedStones = stoneService.getStockedStones();
 		for (StoneInVo s : stone.getStoneIns()) {
 			s.setOpeningStock(s.getStock());
-			s.setStock(s.getStock() * 100);
 			s.setQualityRange(qualityRangeVoMap.get(s.getQualityRange().getRangeId()));
+			for(StoneStockVo svo: stockedStones){
+				if(svo.getQualityRangeVo().getRangeId() == s.getQualityRange().getRangeId()){
+					s.setStock(svo.getStoneStock() + s.getInQuantity());
+					break;
+				}
+			}
 		}
 		long inStoneId = stoneService.saveDailyStoneIn(stone);
 		stone.setInStoneId(inStoneId);
@@ -62,7 +68,9 @@ public class StoneController {
 
 	@PostMapping("/smsStoneIn")
 	public String smsStoneIn(@ModelAttribute Stone stone) {
-		return "stone/smsStoneIn";
+		System.out.println("jdfjkdsfjk" + stone);
+		
+		return "redirect:/home";
 	}
 
 	public List<QualityRangeVo> qualityRanges() {

@@ -24,7 +24,7 @@
 
 							</tr>
 							<tr>
-								<td>
+								<td valign="top">
 									<table width="100%">
 										<tr>
 											<th colspan="2">Stone Stock Details</th>
@@ -33,9 +33,14 @@
 											<th>Quality</th>
 											<th>Quantity</th>
 										</tr>
+										<tr th:each="stoneStock, iter : ${stoneStocks}">
+											
+											<td><p th:text="${stoneStock.qualityRangeVo.rangeShortName}" /></td>
+											<td><p th:text="${stoneStock.stoneStock}" /></td>
+										</tr>
 									</table>
 								</td>
-								<td>
+								<td valign="top">
 									<table width="100%">
 										<tr>
 											<th colspan="2">Stone Stock Details</th>

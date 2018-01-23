@@ -1,13 +1,14 @@
 package com.murari.dao.impl.transaction;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.murari.dao.master.QualityRangeDAO;
+
 import com.murari.dao.transaction.StoneDAO;
-import com.murari.entity.QualityRange;
 import com.murari.entity.StoneIn;
 import com.murari.entity.StoneStock;
 @Transactional
@@ -35,6 +36,14 @@ public class StoneDAOImpl implements StoneDAO {
 //		String hql = "FROM StoneStock as ss WHERE  ss.qualityRange.rangeId = " + qualityRangeId;
 //		return (StoneStock) entityManager.createQuery(hql).getSingleResult();
 		return entityManager.find(StoneStock.class, qualityRangeId);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<StoneStock> getStockedStone() {
+		String hql = "FROM StoneStock as ss WHERE  ss.qualityRange.rangeId in(select rangeId FROM QualityRange as qr where qr.validIndicator='Y')";
+		return (List<StoneStock>) entityManager.createQuery(hql).getResultList();
+//		return entityManager.find(StoneStock.class, qualityRangeId);
 	}
 	
 	@Override
@@ -66,6 +75,8 @@ public class StoneDAOImpl implements StoneDAO {
 		if(stoneStockFromDB != null){
 			double totalQty = stoneStockFromDB.getStoneStock() + stoneStock.getStoneStock();
 			stoneStockFromDB.setStoneStock(totalQty);
+			stoneStockFromDB.setLastInQuantity(stoneStock.getLastInQuantity());
+			stoneStockFromDB.setUpdatedDate(new java.sql.Date(new java.util.Date().getTime()));
 			entityManager.flush();
 		}
 			

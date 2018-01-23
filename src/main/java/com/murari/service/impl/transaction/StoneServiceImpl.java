@@ -1,21 +1,21 @@
 package com.murari.service.impl.transaction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.murari.dao.master.QualityRangeDAO;
 import com.murari.dao.transaction.StoneDAO;
 import com.murari.entity.QualityRange;
 import com.murari.entity.StoneIn;
 import com.murari.entity.StoneInKey;
 import com.murari.entity.StoneStock;
-import com.murari.service.master.QualityRangeService;
 import com.murari.service.transation.StoneService;
 import com.murari.vo.QualityRangeVo;
 import com.murari.vo.Stone;
 import com.murari.vo.StoneInVo;
+import com.murari.vo.StoneStockVo;
 
 @Service
 public class StoneServiceImpl implements StoneService {
@@ -106,8 +106,11 @@ public class StoneServiceImpl implements StoneService {
 		sIn = null;
 		StoneStock stoneStock = getStoneStockByRangeId(qualityRangeVo.getRangeId());
 		if(stoneStock != null){ 
-		stoneStock.setStoneStock(stoneStock.getStoneStock());
-					updateStoneStock(stoneStock);
+			stoneStock.setStoneStock(stoneStock.getStoneStock() + stoneInVo.getInQuantity());
+			stoneStock.setLastInQuantity(stoneInVo.getInQuantity());
+			stoneStock.setUserId("1");
+			stoneStock.setUpdatedDate(new java.sql.Date(new java.util.Date().getTime()));
+//			updateStoneStock(stoneStock);
 		}else{
 			stoneStock = new StoneStock();
 			stoneStock.setQualityRange(qr);
@@ -120,6 +123,31 @@ public class StoneServiceImpl implements StoneService {
 			addStoneStock(stoneStock);
 		}
 		stoneStock = null;
+	}
+	
+	@Override
+	public List<StoneStockVo> getStockedStones(){
+		List<StoneStock> stockedStone = stoneDao.getStockedStone();
+		List<StoneStockVo> vos = new ArrayList<>();
+		for(StoneStock s: stockedStone){
+			StoneStockVo vo = new StoneStockVo();
+			 QualityRangeVo qVo = new QualityRangeVo();
+			 QualityRange range = s.getQualityRange();
+			 qVo.setRangeId(range.getRangeId());
+			 qVo.setRange(range.getRangeName());
+			 qVo.setRangeFrom(range.getRangeFrom());
+			 qVo.setRangeTo(range.getRangeTo());
+			 qVo.setRangeShortName(range.getRangeShortName());
+			 vo.setQualityRangeVo(qVo);
+			 vo.setStoneStock(s.getStoneStock());
+			 vo.setLastInQuantity(s.getLastConsumedQuantity());
+			 vo.setLastInQuantity(s.getLastInQuantity());
+			 vo.setUpdatedDate(s.getUpdatedDate());
+			 vo.setUserId(s.getUserId());
+			 vos.add(vo);
+		}
+		
+		return vos;
 	}
 
 }

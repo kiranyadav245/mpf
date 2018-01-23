@@ -12,7 +12,7 @@
 	<form action="#" th:action="@{/smsStoneIn}" th:object="${stone}"
 			method="post">
     <p th:text="'id: ' + ${stone.inStoneId}" />
-    <input type="text"
+    <input type="hidden"
 						th:field="${stone.inStoneId}" />
     
     <table class="responstable">

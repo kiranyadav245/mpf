@@ -10,6 +10,7 @@ public class SmsServiceImpl implements SmsService {
 	@Override
 	public void sendinStoneDetails(long id) {
 		// TODO Auto-generated method stub
+		System.out.println("sms stone in");
 		
 	}
 	

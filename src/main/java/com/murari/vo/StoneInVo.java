@@ -2,32 +2,30 @@ package com.murari.vo;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-
 public class StoneInVo {
 	private long stoneInId;
-	private long inQuantity; // capture stone in at the date
-	private long stock; //closing quantity
+	private double inQuantity; // capture stone in at the date
+	private double stock; //closing quantity
 	private Date inDate;
 	private String comments; //get by who and which vehicle
 	private QualityRangeVo qualityRange;
-	private long openingStock;
+	private double openingStock;
 	public long getStoneInId() {
 		return stoneInId;
 	}
 	public void setStoneInId(long stoneInId) {
 		this.stoneInId = stoneInId;
 	}
-	public long getInQuantity() {
+	public double getInQuantity() {
 		return inQuantity;
 	}
-	public void setInQuantity(long inQuantity) {
+	public void setInQuantity(double inQuantity) {
 		this.inQuantity = inQuantity;
 	}
-	public long getStock() {
+	public double getStock() {
 		return stock;
 	}
-	public void setStock(long stock) {
+	public void setStock(double stock) {
 		this.stock = stock;
 	}
 	public Date getInDate() {
@@ -48,11 +46,18 @@ public class StoneInVo {
 	public void setQualityRange(QualityRangeVo qualityRange) {
 		this.qualityRange = qualityRange;
 	}
-	public long getOpeningStock() {
+	public double getOpeningStock() {
 		return openingStock;
 	}
-	public void setOpeningStock(long openingStock) {
+	public void setOpeningStock(double openingStock) {
 		this.openingStock = openingStock;
 	}
+	@Override
+	public String toString() {
+		return "StoneInVo [stoneInId=" + stoneInId + ", inQuantity=" + inQuantity + ", stock=" + stock + ", inDate="
+				+ inDate + ", comments=" + comments + ", qualityRange=" + qualityRange + ", openingStock="
+				+ openingStock + "]";
+	}
+	
 	
 }
