@@ -1,33 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:fragment="header-css">
-     <meta charset="utf-8" />
-    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>MPF</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" th:href="@{/css/bootstaplocal.css}"
-              href="../../css/bootstaplocal.css" />
-    <style type="text/css">
-        
-    </style>
-    
-        <!-- this is header-css -->
-        <link rel="stylesheet" type="text/css"
-              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<div th:fragment="header-css">
+	<meta charset="utf-8" />
+	<!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+	<title>MPF</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" th:href="@{/css/bootstaplocal.css}"
+		href="../../css/bootstaplocal.css" />
 
-        <link rel="stylesheet" th:href="@{/css/main.css}"
-              href="../../css/main.css" />
-        <link rel="stylesheet" th:href="@{/css/style.css}"
-              href="../../css/style.css" />
-              
-              
-    </div>
+	<!-- this is header-css -->
+	<link rel="stylesheet" type="text/css"
+		href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+	<link rel="stylesheet" th:href="@{/css/main.css}"
+		href="../../css/main.css" />
+	<link rel="stylesheet" th:href="@{/css/style.css}"
+		href="../../css/style.css" />
+
+
+</div>
 </head>
 <body>
-<div th:fragment="header">
-    <!-- this is header -->
-   <span sec:authorize="isAuthenticated()">
-    <!-- <nav class="navbar navbar-inverse">
+	<div th:fragment="header">
+		<!-- this is header -->
+		<span sec:authorize="isAuthenticated()"> <!-- <nav class="navbar navbar-inverse">
         <div class="container">
             
             <div id="navbar">
@@ -40,35 +36,40 @@
            
         </div>
     </nav> -->
-     <div class="navbar navbar-inverse">
-    <div class="navbar-inner">
-        <div class="container">
-            <!-- <a class="brand" href="/">MPF</a> -->
-    		
-          	
-              <ul class="nav">
-                  <!-- <li class="divider-vertical"></li> -->
-                  <li ><a class="navbar-brand" th:href="@{/}">Home</a></li>
-                  <li ><a class="navbar-brand" th:href="@{/stonein}">Stone</a></li>
-              </ul>
-              <div class="pull-right">
-                <ul class="nav pull-right">
-                	<li class="divider-vertical"></li>
-                    <li><a class="navbar-brand" href="#" >Welcome, <span sec:authentication="name" /></a></li>
-                    <li class="divider-vertical"></li>
-                    <li><a class="navbar-brand" th:href="@{/logout}">Sign Out</a></li>
-                        
-                </ul>
-              </div>
-            
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
+			<div class="navbar  nav">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse"
+							data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+						</a>
+						<!-- <a class="brand" href="/">MPF</a> -->
 
-</script>
-    </span>
-</div>
+
+						<ul class="nav">
+							<!-- <li class="divider-vertical"></li> -->
+							<li><a class="navbar-brand" th:href="@{/}">Home</a></li>
+							<li><a class="navbar-brand" th:href="@{/stonein}">Stone</a></li>
+						</ul>
+						<div class="pull-right">
+							<ul class="nav pull-right">
+								<li class="divider-vertical"></li>
+								<li><a class="navbar-brand" href="#">Welcome, <span
+										sec:authentication="name" /></a></li>
+								<li class="divider-vertical"></li>
+								<li><a class="navbar-brand" th:href="@{/logout}">Sign
+										Out</a></li>
+
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</span>
+	</div>
 
 </body>
 </html>
+
